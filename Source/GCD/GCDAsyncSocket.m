@@ -8066,6 +8066,8 @@ static void CFWriteStreamCallback (CFWriteStreamRef stream, CFStreamEventType ty
 				{
 					// Found IPv6 address.
 					// Wrap the native address structure, and add to results.
+					struct sockaddr_in6 *sockaddr = (struct sockaddr_in6 *)res->ai_addr;
+					sockaddr->sin6_port = htons(port);
 					
 					NSData *address6 = [NSData dataWithBytes:res->ai_addr length:res->ai_addrlen];
 					[addresses addObject:address6];
